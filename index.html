@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>헬로 월드 - 서버 개발 동아리</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .logo-icon {
+            font-size: 3rem;
+            color: #1a2a6c;
+            margin-right: 15px;
+        }
+        
+        .profile {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+        
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #1a2a6c;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            color: #1a2a6c;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        h2 {
+            color: #b21f1f;
+            margin: 20px 0 10px;
+            font-size: 2rem;
+        }
+        
+        h3 {
+            color: #1a2a6c;
+            margin: 15px 0 10px;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .highlight {
+            color: #fdbb2d;
+            font-weight: bold;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #1a2a6c;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 10px 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #fdbb2d;
+            color: #333;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        
+        .skill {
+            flex-basis: 48%;
+            margin-bottom: 20px;
+        }
+        
+        .skill-bar {
+            height: 20px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+        
+        .skill-level {
+            height: 100%;
+            background: linear-gradient(to right, #1a2a6c, #b21f1f);
+            border-radius: 10px;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+            line-height: 20px;
+        }
+        
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .project {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .project:hover {
+            transform: translateY(-5px);
+        }
+        
+        .project-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        
+        .project-content {
+            padding: 20px;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .gallery-item {
+            border-radius: 10px;
+            overflow: hidden;
+            height: 200px;
+        }
+        
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-img:hover {
+            transform: scale(1.05);
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .activity {
+            display: flex;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+        
+        .activity-icon {
+            font-size: 2rem;
+            color: #1a2a6c;
+            margin-right: 15px;
+            min-width: 60px;
+            text-align: center;
+        }
+        
+        .activity-content {
+            flex: 1;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: white;
+            margin-top: 40px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+        }
+        
+        .social-icons {
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            color: #fdbb2d;
+            transform: translateY(-5px);
+        }
+        
+        @media (max-width: 768px) {
+            .skill {
+                flex-basis: 100%;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+            
+            .activity {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .activity-icon {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-server logo-icon"></i>
+                <h1>헬로 월드 동아리</h1>
+            </div>
+            <div class="profile">
+                <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" alt="Hello World Club" class="profile-img">
+                <p>서버 개발과 컴퓨터 공부를 위한 <span class="highlight">최고의 동아리</span></p>
+                <div>
+                    <a href="#about" class="btn">동아리 소개</a>
+                    <a href="#activity" class="btn">활동 내용</a>
+                    <a href="#contact" class="btn">지원하기</a>
+                </div>
+            </div>
+        </header>
+        
+        <section id="about" class="section">
+            <h2>헬로 월드란?</h2>
+            <p>헬로 월드는 <span class="highlight">서버 개발과 컴퓨터 시스템</span>에 관심 있는 학생들이 모여 함께 공부하고 프로젝트를 진행하는 동아리입니다.</p>
+            <p>우리는 프로그래밍 기본부터 시작하여 웹 서버 구축, 데이터베이스 설계, 클라우드 컴퓨팅 등 다양한 주제를 학습하고 실습합니다.</p>
+            
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/7T1gFGIA1e4" title="서버 개발 소개" allowfullscreen></iframe>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2>주요 학습 분야</h2>
+            <div class="skills">
+                <div class="skill">
+                    <p>서버 개발</p>
+                    <div class="skill-bar">
+                        <div class="skill-level" style="width: 90%;">90%</div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <p>데이터베이스</p>
+                    <div class="skill-bar">
+                        <div class="skill-level" style="width: 85%;">85%</div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <p>네트워크 보안</p>
+                    <div class="skill-bar">
+                        <div class="skill-level" style="width: 80%;">80%</div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <p>클라우드 컴퓨팅</p>
+                    <div class="skill-bar">
+                        <div class="skill-level" style="width: 75%;">75%</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="activity" class="section">
+            <h2>동아리 활동</h2>
+            
+            <div class="activity">
+                <div class="activity-icon">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+                <div class="activity-content">
+                    <h3>주정 정기 모임</h3>
+                    <p>매주 수요일 오후 4시, 컴퓨터실에서 정기 모임을 가집니다. 새로운 기술을 배우고 함께 토론합니다.</p>
+                </div>
+            </div>
+            
+            <div class="activity">
+                <div class="activity-icon">
+                    <i class="fas fa-project-diagram"></i>
+                </div>
+                <div class="activity-content">
+                    <h3>프로젝트 진행</h3>
+                    <p>팀별로 웹 서비스, 모바일 앱, 게임 등 다양한 프로젝트를 기획하고 개발합니다.</p>
+                </div>
+            </div>
+            
+            <div class="activity">
+                <div class="activity-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="activity-content">
+                    <h3>특강 및 워크숍</h3>
+                    <p>현업 개발자 초청 특강, 해커톤, 코딩 경진대회 등 다양한 행사를 진행합니다.</p>
+                </div>
+            </div>
+            
+            <h3>활동 사진</h3>
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80" alt="동아리 활동" class="gallery-img">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1568992687947-868a62a9f521?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80" alt="프로젝트 작업" class="gallery-img">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1535223289827-42f1e9919769?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80" alt="코딩 학습" class="gallery-img">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80" alt="발표회" class="gallery-img">
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2>우리의 프로젝트</h2>
+            <div class="projects">
+                <div class="project">
+                    <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80" alt="Project 1" class="project-img">
+                    <div class="project-content">
+                        <h3>학생 포트폴리오 시스템</h3>
+                        <p>동아리 회원들의 프로젝트를展示할 수 있는 웹 포트폴리오 시스템입니다.</p>
+                    </div>
+                </div>
+                <div class="project">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80" alt="Project 2" class="project-img">
+                    <div class="project-content">
+                        <h3>동아리 관리 플랫폼</h3>
+                        <p>동아리 운영을 효율적으로 할 수 있는 회원 관리 및 일정 관리 시스템입니다.</p>
+                    </div>
+                </div>
+                <div class="project">
+                    <img src="https://images.unsplash.com/photo-1542744094-3a31f272c490?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80" alt="Project 3" class="project-img">
+                    <div class="project-content">
+                        <h3>코딩 학습 커뮤니티</h3>
+                        <p>동아리 회원들이 지식을 공유하고 질문할 수 있는 온라인 커뮤니티입니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="contact" class="section">
+            <h2>지원하기</h2>
+            <p>헬로 월드 동아리에 관심이 있으신가요? 언제든지 지원할 수 있습니다!</p>
+            <p>우리는 컴퓨터와 프로그래밍에 열정적인 모든 학생을 환영합니다.</p>
+            <p>지원 방법: 매주 수요일 정기 모임에 참석하거나, 아래 이메일로 문의해주세요.</p>
+            <p>Email: hello@helloworld-club.com</p>
+            <p>동아리 방: 본관 3층 컴퓨터실</p>
+            <a href="mailto:hello@helloworld-club.com" class="btn">지원 문의하기</a>
+        </section>
+    </div>
+    
+    <footer>
+        <p>© 2023 헬로 월드 동아리. All Rights Reserved.</p>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fab fa-discord"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        // 동적 효과를 위한 JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('.btn');
+            
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-3px)';
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+            
+            // 부드러운 스크롤
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 20,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // 기술 수준 애니메이션
+            const skillLevels = document.querySelectorAll('.skill-level');
+            skillLevels.forEach(skill => {
+                const width = skill.style.width;
+                skill.style.width = '0';
+                setTimeout(() => {
+                    skill.style.transition = 'width 1.5s ease-in-out';
+                    skill.style.width = width;
+                }, 500);
+            });
+        });
+    </script>
+</body>
+</html>
